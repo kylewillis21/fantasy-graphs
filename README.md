@@ -1,1 +1,1 @@
-"# fantasy-graphs" 
+# fantasy-graphs
