@@ -1,5 +1,6 @@
 import "./styles/App.css";
 import "./styles/navbar.css";
+import "./styles/import.css";
 
 import { Route, Routes } from "react-router-dom";
 

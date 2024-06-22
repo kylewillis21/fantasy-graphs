@@ -1,0 +1,41 @@
+@media screen and (min-width: 800px) {
+  .importContainer {
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+    color: white;
+    padding: 5px;
+    justify-content: space-evenly;
+    /* background-color: blue; */
+  }
+
+  .instructions {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    /* background-color: white; */
+  }
+
+  .submissionForm {
+    /* background-color: white; */
+    width: 15%;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .submissionForm div {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+  }
+
+  .submissionForm form {
+    position: sticky;
+    top: 0;
+  }
+
+  .submissionForm input {
+    width: 50%;
+  }
+}
