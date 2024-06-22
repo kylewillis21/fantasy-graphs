@@ -1,0 +1,11 @@
+import { League } from "./espn-api/league/league.js";
+import { Player } from "./espn-api/player/player.js";
+import { Team } from "./espn-api/team/team.js";
+// import data from "./espn-apexample responses/expampleTeam.json" assert { type: "json" };
+const league = new League(946854126, 2023);
+const leagueData = await league.fetchLeague();
+await league.fetchTeams(leagueData);
+await league.fetchPlayers();
+await league.fetchDraft();
+console.log(league.teams[0].schedule);
+console.log(league.teams);
