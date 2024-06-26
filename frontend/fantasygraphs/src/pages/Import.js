@@ -5,6 +5,7 @@ import settings from "../assets/images/import/ChangeView.png";
 
 export default function Import() {
   const isDesktop = useMediaQuery({ minWidth: 800 });
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [leagueId, setLeagueId] = useState("");
   const [year, setYear] = useState("");
 
@@ -12,6 +13,7 @@ export default function Import() {
     e.preventDefault();
     console.log("League ID:", leagueId);
     console.log("Year:", year);
+    setIsSubmitted(true);
   };
 
   return (
@@ -53,22 +55,25 @@ export default function Import() {
       </div>
 
       <div className="submissionForm">
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="leagueId">Enter your League ID </label>
-            <input
-              type="text"
-              id="leagueId"
-              value={leagueId}
-              onChange={(e) => setLeagueId(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="year">Year </label>
-            <input type="text" id="year" value={year} onChange={(e) => setYear(e.target.value)} />
-          </div>
-          <button type="submit">Submit</button>
-        </form>
+        {!isSubmitted && (
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="leagueId">Enter your League ID </label>
+              <input
+                type="text"
+                id="leagueId"
+                value={leagueId}
+                onChange={(e) => setLeagueId(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="year">Year </label>
+              <input type="text" id="year" value={year} onChange={(e) => setYear(e.target.value)} />
+            </div>
+            <button type="submit">Submit</button>
+          </form>
+        )}
+        {isSubmitted && <h1>Changes Saved!</h1>}
       </div>
     </div>
   );
