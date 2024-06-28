@@ -29,7 +29,10 @@ export class League {
     if (this.year < 2018) {
       this.currentWeek = data["scoringPeriodId"];
     } else {
-      this.currentWeek = this.scoringPeriodId <= data["status"]["finalScoringPeriod"] ? this.scoringPeriodId : data["status"]["finalScoringPeriod"];
+      this.currentWeek =
+        this.scoringPeriodId <= data["status"]["finalScoringPeriod"]
+          ? this.scoringPeriodId
+          : data["status"]["finalScoringPeriod"];
     }
     this.members = data?.members ?? [];
 
@@ -42,19 +45,21 @@ export class League {
     const schedule = data["schedule"];
     const seasonId = data["seasonId"];
     const members = data?.members ?? [];
-
     const teamRoster = {};
-
     for (const team of data["teams"]) {
       teamRoster[team.id] = team?.roster ?? {};
     }
-
     for (const team of teams) {
       const roster = teamRoster[team.id];
       this.teams.push(new Team(team, seasonId, schedule));
     }
-
     // Sort by team id
+    this.teams.sort((a, b) => a.teamId - b.teamId);
+    ////////////////////////////////
+    //TODO: calculate margin of victory
+    for (const team of this.teams) {
+      /////////////////////////////////////
+    }
   }
 
   async fetchDraft() {
@@ -81,7 +86,18 @@ export class League {
       const bidAmount = pick.bidAmount;
       const keeperStatus = pick.keeper;
       const nominatingTeam = this.getTeamData(pick.nominatingTeamId);
-      this.draft.push(new Pick(team, playerId, playerName, roundNum, roundPick, bidAmount, keeperStatus, nominatingTeam));
+      this.draft.push(
+        new Pick(
+          team,
+          playerId,
+          playerName,
+          roundNum,
+          roundPick,
+          bidAmount,
+          keeperStatus,
+          nominatingTeam
+        )
+      );
     }
   }
 
@@ -90,10 +106,6 @@ export class League {
     for (const player of data) {
       // console.log(player);
       this.playerMap[player.player.id] = player.player.fullName;
-
-      // if (!this.playerMap.hasOwnProperty(player.player.fullName)) {
-      //   this.playerMap[player.player.fullName] = player.player.id;
-      // }
     }
   }
 

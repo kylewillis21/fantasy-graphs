@@ -26,7 +26,7 @@ export class Team {
     this.schedule = [];
     this.scores = [];
     this.outcomes = [];
-    this.mov = [];
+    this.mov = []; // Margin of Victory
     this.fetchRoster(data, year);
     this.fetchSchedule(schedule);
   }
